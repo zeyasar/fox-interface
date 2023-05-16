@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import DataTable from "./components/DataTable";
+import Navbar from "./components/Navbar";
+import HomePage from "./components/HomePage";
+
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import IpCheck from "./components/IpCheck";
+import DomainCheck from "./components/DomainCheck";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/zararli-siteler" element={<DataTable />} />
+          <Route exact path="/:id" element={<DomainCheck />} />
+          <Route path="/ip-check" element={<IpCheck />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
