@@ -41,13 +41,11 @@ const HomePage = () => {
 
   return (
     <Container
-    sx={{justifyContent:'center', alignItems:'center', height:'100vh', display:'flex'}}
+    sx={{justifyContent:'center', alignItems:'center', display:'flex', marginTop:'30px'}}
    
     >
-    <Box
-    // sx={{mx: '4rem'}}
-    >
-    <Card sx={{ maxWidth: 900 }}>
+    <Box>
+    <Card sx={{ width: 500 }}>
       <CardMedia
         component="img"
         alt="green iguana"
@@ -59,7 +57,7 @@ const HomePage = () => {
       </CardActions>
       <CardContent>
         
-        <Typography variant="h6" color="text.secondary" sx={{fontStyle:'italic'}}>
+        <Typography variant="subtitle" color="text.secondary" sx={{fontStyle:'italic'}}>
           { quote?.quote }
         </Typography>
         <Typography variant="h6" color="text.secondary" marginTop={5}>

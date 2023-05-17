@@ -16,20 +16,14 @@ import loadingGif from "../images/loading.gif";
 import { useNavigate } from "react-router-dom";
 
 const DataTable = () => {
-  const [data, setData] = useState([]); 
-  const [expanded, setExpanded] = useState(false); 
+  const [data, setData] = useState([]);
+  const [expanded, setExpanded] = useState(false);
 
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleExpand = () => {
     setExpanded(true);
   };
-  console.log(data);
-
-  // const handleClick =(e)=>{
-    
-  // }
 
   useEffect(() => {
     axios
@@ -41,6 +35,41 @@ const DataTable = () => {
         console.log(error);
       });
   }, []);
+
+  const calculateDescDistribution = () => {
+    const distribution = {};
+
+    data.models?.forEach((row) => {
+      const desc = row.desc.toLowerCase();
+      if (distribution[desc]) {
+        distribution[desc] += 1;
+      } else {
+        distribution[desc] = 1;
+      }
+    });
+
+    return distribution;
+  };
+
+  const calculateUrlExtensionDistribution = () => {
+    const distribution = {};
+
+    data.models?.forEach((row) => {
+      const url = row.url.toLowerCase();
+      const extension = url.substr(url.lastIndexOf("."));
+      if (distribution[extension]) {
+        distribution[extension] += 1;
+      } else {
+        distribution[extension] = 1;
+      }
+    });
+
+    return distribution;
+  };
+
+  const descDistribution = calculateDescDistribution();
+  const urlExtensionDistribution = calculateUrlExtensionDistribution();
+
   return (
     <div>
       <Container>
@@ -78,7 +107,15 @@ const DataTable = () => {
                         <TableCell>{row.date}</TableCell>
                         <TableCell>{row.desc}</TableCell>
                         <TableCell>
-                          <Button onClick={()=>navigate(`/${row.id}`, { state:{searchTerm: `${row.url}`}})}>Whois Sorgu</Button>
+                          <Button
+                            onClick={() =>
+                              navigate(`/${row.id}`, {
+                                state: { searchTerm: `${row.url}` },
+                              })
+                            }
+                          >
+                            Whois Sorgu
+                          </Button>
                         </TableCell>
                       </TableRow>
                     ))}
@@ -93,6 +130,49 @@ const DataTable = () => {
               </Typography>
             </Container>
           )}
+            <Box sx={{display:'flex'}}>
+          <Container maxWidth="sm">
+            <TableContainer>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Açıklama</TableCell>
+                    <TableCell>Dağılım</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {Object.entries(descDistribution).map(([desc, count], index) => (
+                    <TableRow key={index}>
+                      <TableCell>{desc}</TableCell>
+                      <TableCell>{count}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Container>
+
+          <Container maxWidth="sm">
+            <TableContainer>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Uzantı</TableCell>
+                    <TableCell>Dağılım</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {Object.entries(urlExtensionDistribution).map(([extension, count], index) => (
+                    <TableRow key={index}>
+                      <TableCell>{extension}</TableCell>
+                      <TableCell>{count}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Container>
+          </Box>
         </Box>
       </Container>
     </div>
