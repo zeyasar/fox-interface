@@ -130,7 +130,9 @@ const DataTable = () => {
               </Typography>
             </Container>
           )}
-            <Box sx={{display:'flex'}}>
+            
+        </Box>
+        <Box sx={{display:'flex'}}>
           <Container maxWidth="sm">
             <TableContainer>
               <Table>
@@ -173,7 +175,6 @@ const DataTable = () => {
             </TableContainer>
           </Container>
           </Box>
-        </Box>
       </Container>
     </div>
   );
