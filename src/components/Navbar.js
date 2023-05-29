@@ -145,7 +145,7 @@ function Navbar() {
               sx={{ my: 2, color: "white", display: "block" }}
             >
               {" "}
-              Zararli Siteler
+              Zararlı Siteler
             </Button>
             <Button
               onClick={handleIp}

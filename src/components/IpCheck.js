@@ -37,7 +37,7 @@ function IPCheck() {
   return (
     <Container>
     <Box marginTop={5}>
-      <InputLabel htmlFor="ipAddress">Bir IP Adresi Girin: </InputLabel>
+      <InputLabel htmlFor="outlined-basic">Bir IP Adresi Girin: </InputLabel>
       {/* <input type="text" id="ipAddress"   /> */}
       <TextField id="outlined-basic"  variant="outlined" value={userInput} onChange={handleInputChange}/>
       <Button onClick={generateIPAddresses} sx={{color:'rgb(255,112,0)'}}>Olustur</Button>

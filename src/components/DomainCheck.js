@@ -6,7 +6,7 @@ import { Container, Box } from "@mui/material";
 const DomainCheck = () => {
   let { state } = useLocation();
   const { searchTerm } = state;
-  console.log(searchTerm);
+  // console.log(searchTerm);
   const [domainData, setDomainData] = useState([]);
 
   useEffect(() => {
